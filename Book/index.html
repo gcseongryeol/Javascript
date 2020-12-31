@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>API</title>
+</head>
+
+<body>
+    <h1>My Site</h1>
+    <input id="bookName" value="" type="text">
+    <button id="search">검색</button>
+    <button a onClick="window.location.reload()">초기화</button>
+    <p></p>
+    <script src="https://code.jquery.com/jquery-3.5.1.js"
+        integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous">
+        </script>
+    <script>
+        $("#bookName").keyup(function(event) {
+            if(event.keyCode === 13) {
+                $("#search").click();
+            }
+        });
+
+        $(document).ready(function () {
+            $("#search").click(function () {
+                $.ajax({
+                    method: "GET",
+                    url: "https://dapi.kakao.com/v3/search/book?target=title",
+                    data: { query: $("#bookName").val() },
+                    headers: { Authorization: "KakaoAK dc0ed87b425a6e2738615e3ef1a11616" }
+                })
+                    .done(function (msg) {
+                        console.log(msg);
+                        for (var i = 0; i < msg.documents.length; i++) {
+                            $("p").append("<img src='" + msg.documents[i].thumbnail + "'/>" + "<br>");
+                            $("p").append("<strong>" + " 제목 : " + msg.documents[i].title + "</strong>" + "<br>");
+                            $("p").append("<strong>" + " 작가 : " + msg.documents[i].authors + "</strong>" + "<br>");
+                        }
+                    });
+            });
+        });
+    </script>
+</body>
+
+</html>
