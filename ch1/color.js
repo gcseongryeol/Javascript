@@ -1,0 +1,1 @@
+// 색깔 관련 코드를 적어서 각 페이지에 <script src="color.js"></script> 해주면 사용 가능

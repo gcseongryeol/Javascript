@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+    <body>
+        <article>
+        </article>
+        <input type="button" value="fetch" onclick="
+            fetch('html').then(function(response){ // then : 응답이 끝나면 함수 실행시켜라.
+                response.text().then(function(text){
+                    alert(text);
+                    document.querySelector('article').innerHTML = text;
+                })
+            })
+        ">
+    </body>
+</html>

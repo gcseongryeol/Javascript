@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+    <script>
+
+        arr = [1, 3, 19, 22, 26, 91];
+        arr1 = arr.filter(function(item) {
+            return item % 2 == 0;
+        });
+
+        console.log('arr1 : ' + arr1);
+
+        var myArr = {
+            0: 1,
+            1: 3,
+            2: 19,
+            3: 22,
+            4: 26,
+            5: 91,
+            length: 6,
+
+            map: function(item) {
+                var temp = [];
+                for(var i = 0; i < this.length; i++) {
+                    var val = item(this[i]);
+                    temp.push(val);
+                }
+
+                return temp;
+            },
+
+            filter: function(callback) {
+                var temp = [];
+                for(var i = 0; i < this.length; i++) {
+                    var val = callback(this[i]);
+                    if(val == true) {
+                        temp.push(this[i]);
+                    }
+                    
+                }
+
+                return temp;
+            }
+
+        }
+
+        arr3 = myArr.map(function(cb) {
+            return cb + 2;
+        });
+
+        console.log('arr3 : ' + arr3);
+
+        arr2 = myArr.filter(function(item) {
+            return item % 2 == 0;
+        });
+
+        console.log('arr2 : ' + arr2);
+    </script>
+</body>
+</html>
